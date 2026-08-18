@@ -1,0 +1,14 @@
+.DS_Store
+*.env
+*.env.*
+!.env.example
+config.yaml
+credentials.json
+webhook-secret.env
+**/.env
+**/secrets/
+**/deliverables/backups/
+__pycache__/
+*.pyc
+.venv/
+*.log
