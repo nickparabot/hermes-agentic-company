@@ -1,0 +1,17 @@
+[Unit]
+Description=Basecamp → Hermes webhook signature proxy
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/work/{{SLUG}}/shared/basecamp
+EnvironmentFile=%h/.config/basecamp/webhook-secret.env
+Environment=BASECAMP_EXPECTED_BUCKET={{PROJECT_ID}}
+Environment=HERMES_WEBHOOK_URL=http://127.0.0.1:8644/webhooks/basecamp-todo
+Environment=PROXY_LISTEN_PORT=9876
+ExecStart=%h/.local/bin/python3 %h/work/{{SLUG}}/shared/basecamp/webhook-proxy.py
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=default.target

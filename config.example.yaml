@@ -1,0 +1,58 @@
+# Copy to config.yaml in the company repo (gitignored) or fill these
+# when the lead agent interviews the CEO. Never commit secrets.
+
+company_name: "Acme Labs"
+company_legal: "Acme Labs LLC"
+company_slug: "acme"                 # Kanban board slug + ~/work/<slug>
+company_root: "~/work/acme"
+github_owner: "acme-labs"            # user or org that will own repos
+company_repo: "acme-labs/acme-llc"   # charter / policies / dept workspaces
+default_branch_company: "master"     # or main
+default_branch_product: "main"
+
+ceo:
+  name: "Ada"
+  mention: "@Ada"                    # NOT a Hermes profile
+  email: "ada@acme.example"
+
+lead:
+  name: "Morgan"
+  mention: "@Morgan"
+  hermes_profile: "default"          # live worker. Do not assign lead work to a leftover profile.
+  email: "morgan@acme.example"       # used to ignore bot Basecamp comments
+
+departments:
+  # Bring these up incrementally. Day 1: lead + engineering.
+  - { mention: "@Morgan", profile: "default", role: "VP / Chief of Staff", folder: "vp" }
+  - { mention: "@Linus", profile: "linus", role: "Engineering", folder: "engineering" }
+  - { mention: "@Meredith", profile: "meredith", role: "Product", folder: "product" }
+  - { mention: "@Warren", profile: "warren", role: "Finance", folder: "finance" }
+  - { mention: "@Harvey", profile: "harvey", role: "Legal", folder: "legal" }
+  - { mention: "@Anton", profile: "anton", role: "Security / Infra", folder: "security" }
+
+product_repos:
+  - path: "~/work/app"
+    github: "acme-labs/app"
+    ci: "bin/ci"                     # full local gate command
+    deploy_owner: "anton"            # after merge; CEO can override
+
+basecamp:
+  # Use the account the CEO actually types in. Personal vs org is a common trap.
+  account_id: 0
+  project_id: 0                      # webhook bucket.id is PROJECT, not account
+  project_name: "Acme"
+  todolist_name: "Agent Tasks"
+  webhook_domain: "https://agents.acme.example"
+  webhook_secret_env: "~/.config/basecamp/webhook-secret.env"
+
+hard_lines:
+  # Irreversible actions. Lead agent must not do these without CEO written go.
+  - production deploys
+  - live payments
+  - contract execution
+  - external publishing
+
+runtime:
+  # Pick one stack and write it down. Do not run two coding CLIs in parallel.
+  agent: "hermes"
+  notes: "Profiles + Kanban workers. Document the engineering coding lane."
